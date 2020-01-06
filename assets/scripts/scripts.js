@@ -33,6 +33,7 @@
 
 var questionCount = 0;
 var secondsLeft = 0;
+var currentScore = 0;
 
 // Display a question and its options as a list of buttons.
 function displayQuestion(num) {
@@ -60,12 +61,14 @@ $("#questionBody").click(function(event) {
   ) {
     console.log("Correct");
     questionCount++;
+    currentScore += 10;
     clearQuestions();
     displayQuestion(questionCount);
   } else {
-    secondsLeft -= 5;
+    currentScore -= 5;
     console.log("Wrong");
   }
+  updateScore();
 });
 
 // Clears out content of question area so next question can be filled in
@@ -78,6 +81,8 @@ function clearQuestions() {
 $("#start").click(function() {
   $(this).addClass("d-none");
   displayQuestion(questionCount);
+  $("#timer").removeClass("d-none");
+  $("#score").removeClass("d-none");
   timeLimit();
   timer();
 });
@@ -98,4 +103,8 @@ function timer() {
       clearInterval(timeRemaining);
     }
   }, 1000);
+}
+
+function updateScore() {
+  $("#currentScore").text(currentScore);
 }
