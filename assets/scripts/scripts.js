@@ -32,27 +32,40 @@
 */
 
 // Display a question and its options as a list of buttons.
-function displayQuestion(i) {
-  $("#questionHead").text(questions[i].title);
+var questionCount = 0;
 
-  for (var j = 0; j < questions[i].choices.length; j++) {
+function displayQuestion(num) {
+  $("#questionHead").text(questions[num].title);
+
+  for (var j = 0; j < questions[num].choices.length; j++) {
     $("#questionOptions").append(
       "<li><button class='choice' data-index=" +
         j +
         ">" +
-        questions[i].choices[j] +
+        questions[num].choices[j] +
         "</button></li>"
     );
   }
 }
 // Check whether the selected answer is correct
-$("#questionBody").click(function(event, i) {
+$("#questionBody").click(function(event) {
   console.log(event.target);
   var clickedIndex = parseInt($(event.target).attr("data-index"));
   console.log(clickedIndex);
-  if (questions[i].choices[clickedIndex] === questions[i].answer) {
+  if (
+    questions[questionCount].choices[clickedIndex] ==
+    questions[questionCount].answer
+  ) {
     console.log("Correct");
+    questionCount++;
+    clearQuestions();
+    displayQuestion(questionCount);
   } else console.log("Wrong");
 });
 
-displayQuestion(5);
+function clearQuestions() {
+  $("#questionHead").text("");
+  $("#questionOptions").html("");
+}
+
+displayQuestion(questionCount);
