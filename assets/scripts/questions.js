@@ -22,7 +22,7 @@ var questions = [
   {
     title: "In Javascript, what operator breaks a string onto another line?",
     choices: ["Slash /", "Backslash \u005c", "Pipe |", "Modulo %"],
-    answer: "Backslash '\u005c'"
+    answer: "Backslash \u005c"
   },
   {
     title: "What is the AND operator in JavaScript?",
@@ -57,7 +57,7 @@ var questions = [
   {
     title: "What operator separates items in an array?",
     choices: ["Comma ','", "Semicolon ';'", "Colon ':'", "Period '.'"],
-    answer: "alerts"
+    answer: "Comma ','"
   }
 ];
 
