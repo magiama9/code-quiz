@@ -21,7 +21,7 @@ var questions = [
   },
   {
     title: "In Javascript, what operator breaks a string onto another line?",
-    choices: ["Slash /", "Backslash '\u005c'", "Pipe |", "Modulo %"],
+    choices: ["Slash /", "Backslash \u005c", "Pipe |", "Modulo %"],
     answer: "Backslash '\u005c'"
   },
   {
