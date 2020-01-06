@@ -1,13 +1,13 @@
 var questions = [
   {
     title: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts"
+    choices: ["Strings", "Booleans", "Alerts", "Numbers"],
+    answer: "Alerts"
   },
   {
     title: "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses"
+    choices: ["Quotes \"\"", "Curly brackets {}", "Parentheses ()", "Square Brackets []"],
+    answer: "Parentheses ()"
   },
   {
     title: "What does 'NaN' mean in JavaScript?",
