@@ -31,9 +31,10 @@
 
 */
 
-// Display a question and its options as a list of buttons.
 var questionCount = 0;
+var secondsLeft = 0;
 
+// Display a question and its options as a list of buttons.
 function displayQuestion(num) {
   $("#questionHead").text(questions[num].title);
 
@@ -47,7 +48,8 @@ function displayQuestion(num) {
     );
   }
 }
-// Check whether the selected answer is correct
+/* Check whether the selected answer is correct and iterate through 
+ to the next question. */
 $("#questionBody").click(function(event) {
   console.log(event.target);
   var clickedIndex = parseInt($(event.target).attr("data-index"));
@@ -60,12 +62,40 @@ $("#questionBody").click(function(event) {
     questionCount++;
     clearQuestions();
     displayQuestion(questionCount);
-  } else console.log("Wrong");
+  } else {
+    secondsLeft -= 5;
+    console.log("Wrong");
+  }
 });
 
+// Clears out content of question area so next question can be filled in
 function clearQuestions() {
   $("#questionHead").text("");
   $("#questionOptions").html("");
 }
 
-displayQuestion(questionCount);
+// Makes start button start the timer and display the first question
+$("#start").click(function() {
+  $(this).addClass("d-none");
+  displayQuestion(questionCount);
+  timeLimit();
+  timer();
+});
+
+// Determine time limit based on number of questions
+function timeLimit() {
+  secondsLeft = questions.length * 10;
+  $("#timeLeft").text(secondsLeft);
+}
+
+// Countdown timer
+function timer() {
+  var timeRemaining = setInterval(function() {
+    secondsLeft--;
+    $("#timeLeft").text(secondsLeft);
+    if (secondsLeft === 0) {
+      $("#timeLeft").text("TIME'S UP!");
+      clearInterval(timeRemaining);
+    }
+  }, 1000);
+}
