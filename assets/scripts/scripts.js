@@ -37,24 +37,28 @@ var secondsLeft = 0;
 var currentScore = 0;
 var highScores = { name: [], score: [] };
 
+// Adds popover functionality to dynamically generated content(e.g. list options)
+// $("body").popover({
+//   selector: '[rel="popover"]'
+// });
+
 // Display a question and its options as a list of buttons.
 function displayQuestion(num) {
   $("#questionHead").text(questions[num].title);
 
   for (var j = 0; j < questions[num].choices.length; j++) {
     $("#questionOptions").append(
-      "<li class='list-group-item'><button class='choice btn btn-primary' data-index=" +
+      "<li class='list-group-item'><a class='choice btn btn-primary' tabindex=" +
         j +
         ">" +
-        questions[num].choices[j] +
-        "</button></li>"
+        questions[num].choices[j]
     );
   }
 }
 /* Check whether the selected answer is correct and iterate through 
  to the next question if the answer was correct. */
 $("#questionBody").click(function(event) {
-  var clickedIndex = parseInt($(event.target).attr("data-index"));
+  var clickedIndex = parseInt($(event.target).attr("tabindex"));
   if (
     questions[questionCount].choices[clickedIndex] ==
     questions[questionCount].answer
@@ -70,6 +74,12 @@ $("#questionBody").click(function(event) {
     }
   } else {
     currentScore -= 5;
+    $(event.target).attr({
+      "data-toggle": "popover",
+      title: "Wrong Answer. Try Again",
+      "data-trigger": "focus"
+    });
+    $(event.target).popover("toggle");
     console.log("Wrong");
   }
   updateScore();
@@ -79,6 +89,7 @@ $("#questionBody").click(function(event) {
 function clearQuestions() {
   $("#questionHead").text("");
   $("#questionOptions").html("");
+  $("body").popover("hide");
 }
 
 // Makes start button start the timer and display the first question
@@ -157,8 +168,7 @@ function displayScores() {
       "<li class='list-group-item'>" +
         highScores.name[i] +
         ":" +
-        highScores.score[i] +
-        "</li>"
+        highScores.score[i]
     );
   }
 }
