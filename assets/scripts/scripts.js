@@ -123,8 +123,10 @@ function gameOver() {
 
 $("#save").click(function() {
   event.preventDefault();
-  save($("#name").text().trim());
+  save($("#name").val());
 });
+
+
 // Saves score to local storage and displays highscore list
 function save(str) {
   highScores.score.push(currentScore);
@@ -137,7 +139,9 @@ function save(str) {
 // Displays high scores list. Function is called in save()
 function displayScores() {
   var highScoresStr = localStorage.getItem("highscores");
+  var scoreNameStr = localStorage.getItem("names");
   highScores.score = JSON.parse(highScoresStr);
+  highScores.name = JSON.parse(scoreNameStr);
   $("#highScoresList").removeClass("d-none");
   $("#saveScore").addClass("d-none");
   for (var i = 0; i < highScores.score.length; i++) {
