@@ -34,7 +34,7 @@
 var questionCount = 0;
 var secondsLeft = 0;
 var currentScore = 0;
-var highScores = {name:[], score:[]};
+var highScores = { name: [], score: [] };
 
 // Display a question and its options as a list of buttons.
 function displayQuestion(num) {
@@ -113,9 +113,7 @@ function updateScore() {
   $("#currentScore").text(currentScore);
 }
 
-
 // Handles quiz end
-
 function gameOver() {
   $("#finalScoreSpan").text(currentScore);
   $("#saveScore").removeClass("d-none");
@@ -123,17 +121,23 @@ function gameOver() {
   $("#score").addClass("d-none");
 }
 
-// Lets user save score to local storage and displays highscore list
-function save() {
+$("#save").click(function() {
+  event.preventDefault();
+  save($("#name").text().trim());
+});
+// Saves score to local storage and displays highscore list
+function save(str) {
   highScores.score.push(currentScore);
+  highScores.name.push(str);
   localStorage.setItem("highscores", JSON.stringify(highScores.score));
+  localStorage.setItem("names", JSON.stringify(highScores.name));
   displayScores();
 }
 
 // Displays high scores list. Function is called in save()
 function displayScores() {
-  var highScoresObj = JSON.parse(localstorage.getItem("highscores"));
-  highScores.score = highScoresObj;
+  var highScoresStr = localStorage.getItem("highscores");
+  highScores.score = JSON.parse(highScoresStr);
   $("#highScoresList").removeClass("d-none");
   $("#saveScore").addClass("d-none");
   for (var i = 0; i < highScores.length; i++) {
