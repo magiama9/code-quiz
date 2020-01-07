@@ -43,7 +43,7 @@ function displayQuestion(num) {
 
   for (var j = 0; j < questions[num].choices.length; j++) {
     $("#questionOptions").append(
-      "<li class='list-group-item'><button class='choice' data-index=" +
+      "<li class='list-group-item'><button class='choice btn btn-primary' data-index=" +
         j +
         ">" +
         questions[num].choices[j] +
@@ -111,7 +111,7 @@ function timer() {
       setTimeout(function() {
         updateScore();
         gameOver();
-      },2000);
+      }, 2000);
     }
   }, 1000);
 }
