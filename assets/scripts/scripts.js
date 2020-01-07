@@ -48,7 +48,7 @@ function displayQuestion(num) {
 
   for (var j = 0; j < questions[num].choices.length; j++) {
     $("#questionOptions").append(
-      "<li class='list-group-item'><a class='choice btn btn-primary' tabindex=" +
+      "<li class='list-group-item border-0'><a class='choice btn btn-primary' tabindex=" +
         j +
         ">" +
         questions[num].choices[j]
@@ -135,7 +135,8 @@ function updateScore() {
 // Handles quiz end
 function gameOver() {
   $("#finalScoreSpan").text(currentScore);
-  $("#saveScore").removeClass("d-none");
+  $("#saveModal").modal();
+  // $("#saveScore").removeClass("d-none");
   $("#timer").addClass("d-none");
   $("#score").addClass("d-none");
 }
@@ -152,6 +153,7 @@ function save(str) {
   highScores.name.push(str);
   localStorage.setItem("highscores", JSON.stringify(highScores.score));
   localStorage.setItem("names", JSON.stringify(highScores.name));
+  $("#saveModal").modal("hide");
   displayScores();
 }
 
