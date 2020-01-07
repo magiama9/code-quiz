@@ -37,10 +37,6 @@ var secondsLeft = 0;
 var currentScore = 0;
 var highScores = { name: [], score: [] };
 
-// Adds popover functionality to dynamically generated content(e.g. list options)
-// $("body").popover({
-//   selector: '[rel="popover"]'
-// });
 
 // Display a question and its options as a list of buttons.
 function displayQuestion(num) {
@@ -163,11 +159,11 @@ function displayScores() {
   var scoreNameStr = localStorage.getItem("names");
   highScores.score = JSON.parse(highScoresStr);
   highScores.name = JSON.parse(scoreNameStr);
-  $("#highScoresList").removeClass("d-none");
+  $("#highScoresDiv").removeClass("d-none");
   $("#saveScore").addClass("d-none");
   for (var i = 0; i < highScores.score.length; i++) {
     $("#highScoreList").append(
-      "<li class='list-group-item'>" +
+      "<li class='list-group-item border-0'>" +
         highScores.name[i] +
         ":" +
         highScores.score[i]
