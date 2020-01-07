@@ -140,7 +140,7 @@ function displayScores() {
   highScores.score = JSON.parse(highScoresStr);
   $("#highScoresList").removeClass("d-none");
   $("#saveScore").addClass("d-none");
-  for (var i = 0; i < highScores.length; i++) {
-    $("#highScoreList").append("<li>" + highScores[i] + "</li>");
+  for (var i = 0; i < highScores.score.length; i++) {
+    $("#highScoreList").append("<li>" + highScores.name[i] +":"+ highScores.score[i] + "</li>");
   }
 }
