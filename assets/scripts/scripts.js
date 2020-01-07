@@ -34,6 +34,7 @@
 var questionCount = 0;
 var secondsLeft = 0;
 var currentScore = 0;
+var highScores = {name:[], score:[]};
 
 // Display a question and its options as a list of buttons.
 function displayQuestion(num) {
@@ -52,9 +53,7 @@ function displayQuestion(num) {
 /* Check whether the selected answer is correct and iterate through 
  to the next question. */
 $("#questionBody").click(function(event) {
-  console.log(event.target);
   var clickedIndex = parseInt($(event.target).attr("data-index"));
-  console.log(clickedIndex);
   if (
     questions[questionCount].choices[clickedIndex] ==
     questions[questionCount].answer
@@ -63,7 +62,11 @@ $("#questionBody").click(function(event) {
     questionCount++;
     currentScore += 10;
     clearQuestions();
-    displayQuestion(questionCount);
+    if (questionCount < questions.length) {
+      displayQuestion(questionCount);
+    } else {
+      gameOver();
+    }
   } else {
     currentScore -= 5;
     console.log("Wrong");
@@ -105,6 +108,35 @@ function timer() {
   }, 1000);
 }
 
+// Updates current score
 function updateScore() {
   $("#currentScore").text(currentScore);
+}
+
+
+// Handles quiz end
+
+function gameOver() {
+  $("#finalScoreSpan").text(currentScore);
+  $("#saveScore").removeClass("d-none");
+  $("#timer").addClass("d-none");
+  $("#score").addClass("d-none");
+}
+
+// Lets user save score to local storage and displays highscore list
+function save() {
+  highScores.score.push(currentScore);
+  localStorage.setItem("highscores", JSON.stringify(highScores.score));
+  displayScores();
+}
+
+// Displays high scores list. Function is called in save()
+function displayScores() {
+  var highScoresObj = JSON.parse(localstorage.getItem("highscores"));
+  highScores.score = highScoresObj;
+  $("#highScoresList").removeClass("d-none");
+  $("#saveScore").addClass("d-none");
+  for (var i = 0; i < highScores.length; i++) {
+    $("#highScoreList").append("<li>" + highScores[i] + "</li>");
+  }
 }
