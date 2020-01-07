@@ -31,6 +31,7 @@
 
 */
 
+// Global Variables
 var questionCount = 0;
 var secondsLeft = 0;
 var currentScore = 0;
@@ -51,7 +52,7 @@ function displayQuestion(num) {
   }
 }
 /* Check whether the selected answer is correct and iterate through 
- to the next question. */
+ to the next question if the answer was correct. */
 $("#questionBody").click(function(event) {
   var clickedIndex = parseInt($(event.target).attr("data-index"));
   if (
@@ -121,6 +122,7 @@ function gameOver() {
   $("#score").addClass("d-none");
 }
 
+// Handles click/submit event on the score save form
 $("#save").click(function() {
   event.preventDefault();
   save($("#name").val());
