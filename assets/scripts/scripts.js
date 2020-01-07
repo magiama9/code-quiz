@@ -140,6 +140,7 @@ $("#save").click(function() {
   fetchScores();
   $("#name").text("");
   switchPage();
+  resetStart();
 });
 
 function fetchScores() {
@@ -154,6 +155,9 @@ function fetchScores() {
     };
     storedScores.push(userScore);
   }
+
+  // Clears out content of high score list so it can be refilled.
+  $("#highScoreList").html("");
 
   // Iterates through the scores and appends them to the score list
   for (var i = 0; i < storedScores.length; i++) {
@@ -182,4 +186,10 @@ function switchPage() {
   $("#highScorePage").toggleClass("active");
   $("#quizBody").toggleClass("d-none");
   $("#highScoresDiv").toggleClass("d-none");
+}
+
+function resetStart() {
+  $("#start").toggleClass("d-none");
+  questionCount = 0;
+  currentScore = 0;
 }
