@@ -188,6 +188,7 @@ function switchPage() {
   $("#highScoresDiv").toggleClass("d-none");
 }
 
+// Resets the score and question count so user can take the quiz again
 function resetStart() {
   $("#start").toggleClass("d-none");
   questionCount = 0;
