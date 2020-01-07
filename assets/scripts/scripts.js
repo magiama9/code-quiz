@@ -104,7 +104,14 @@ function timer() {
     $("#timeLeft").text(secondsLeft);
     if (secondsLeft === 0) {
       $("#timeLeft").text("TIME'S UP!");
+      clearQuestions();
       clearInterval(timeRemaining);
+
+      // Waits two seconds after time running out then runs game end functions.
+      setTimeout(function() {
+        updateScore();
+        gameOver();
+      },2000);
     }
   }, 1000);
 }
@@ -128,7 +135,6 @@ $("#save").click(function() {
   save($("#name").val());
 });
 
-
 // Saves score to local storage and displays highscore list
 function save(str) {
   highScores.score.push(currentScore);
@@ -147,6 +153,12 @@ function displayScores() {
   $("#highScoresList").removeClass("d-none");
   $("#saveScore").addClass("d-none");
   for (var i = 0; i < highScores.score.length; i++) {
-    $("#highScoreList").append("<li class='list-group-item'>" + highScores.name[i] +":"+ highScores.score[i] + "</li>");
+    $("#highScoreList").append(
+      "<li class='list-group-item'>" +
+        highScores.name[i] +
+        ":" +
+        highScores.score[i] +
+        "</li>"
+    );
   }
 }
