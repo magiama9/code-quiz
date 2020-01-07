@@ -37,7 +37,6 @@ var secondsLeft = 0;
 var currentScore = 0;
 var highScores = { name: [], score: [] };
 
-
 // Display a question and its options as a list of buttons.
 function displayQuestion(num) {
   $("#questionHead").text(questions[num].title);
@@ -75,7 +74,10 @@ $("#questionBody").click(function(event) {
       title: "Wrong Answer. Try Again",
       "data-trigger": "focus"
     });
-    $(event.target).popover("toggle");
+    // Ensures popover only happens if a button is clicked, not a random space in the div
+    if (clickedIndex >= 0) {
+      $(event.target).popover("toggle");
+    }
     console.log("Wrong");
   }
   updateScore();
