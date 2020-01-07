@@ -15,13 +15,13 @@ Users receive 10 points for each correct answer and lose 5 points for each incor
 The application reads questions formatted as an array of objects loaded in from another file "/assets/scripts/questions.js". The application utilizes local storage to allow users to save and view their scores.
 
 The application utilizes the following frameworks and libraries:
-*Jquery
-*Bootstrap
-*Popper
+  * Jquery
+  * Bootstrap
+  * Popper
 
 ## To-do List
 
-*Implement open-source API to load quiz questions dynamically based on user selection.
-*Order and number high scores from highest to lowest.
-*Implement server-side storage of scores.
-*Add responsive styling and accessibility.
+  * Implement open-source API to load quiz questions dynamically based on user selection.
+  * Order and number high scores from highest to lowest.
+  * Implement server-side storage of scores.
+  * Add responsive styling and accessibility.
