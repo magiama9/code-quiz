@@ -4,6 +4,7 @@ This is the repository and application for the "Code Quiz" homework assignment.
 
 ## About This Application
 
+![Application Screenshot](https://github.com/magiama9/code-quiz/blob/master/assets/images/question-screenshot.png)
 This application is a simple quiz app currently testing basic JavaScript knowledge. The application is designed so that additional questions can be added without changing or breaking any functionality. The content, scoring, and timing dynamically update based on the number of available questions.
 
 Currently, the quiz contains 10 questions about basic JavaScript terminology and functionality.
