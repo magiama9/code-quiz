@@ -43,7 +43,7 @@ function displayQuestion(num) {
 
   for (var j = 0; j < questions[num].choices.length; j++) {
     $("#questionOptions").append(
-      "<li><button class='choice' data-index=" +
+      "<li class='list-group-item'><button class='choice' data-index=" +
         j +
         ">" +
         questions[num].choices[j] +
@@ -147,6 +147,6 @@ function displayScores() {
   $("#highScoresList").removeClass("d-none");
   $("#saveScore").addClass("d-none");
   for (var i = 0; i < highScores.score.length; i++) {
-    $("#highScoreList").append("<li>" + highScores.name[i] +":"+ highScores.score[i] + "</li>");
+    $("#highScoreList").append("<li class='list-group-item'>" + highScores.name[i] +":"+ highScores.score[i] + "</li>");
   }
 }
