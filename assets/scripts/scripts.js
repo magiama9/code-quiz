@@ -182,9 +182,15 @@ function displayScores() {
 $("#highScorePage").click(function(){
   $(this).addClass("active");
   $("#quizPage").removeClass("active");
+  $("#quizBody").addClass("d-none");
+  $("#highScoresDiv").removeClass("d-none");
+
 })
 
 $("#quizPage").click(function(){
   $(this).addClass("active");
+  $("#quizBody").removeClass("d-none");
+  $("#highScoresDiv").addClass("d-none");
   $("#highScorePage").removeClass("active");
+
 })
