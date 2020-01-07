@@ -22,20 +22,40 @@
     <title>Code Quiz - SHR</title>
   </head>
   <body>
-    <h1>Code Quiz</h1>
-    <button id="start" class="btn btn-primary">Start Quiz</button>
-    <h2 id="timer" class="d-none">
-      Time Remaining:<span id="timeLeft">0 seconds</span>
-    </h2>
-    <h2 id="score" class="d-none">
-      Current Score:<span id="currentScore">0</span>
-    </h2>
-
-    <div id="questionBody">
-      <h3 id="questionHead"></h3>
-      <ul id="questionOptions" class="list-group"></ul>
+    <div class="card text-center">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#" id="quizPage">Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="highScorePage">Highscores</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Code Quiz</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        
+        <div id="questionBody">
+          <h3 id="questionHead"></h3>
+          <ul id="questionOptions" class="list-inline"></ul>
+        </div>
+        <a id="start" class="btn btn-primary">Start Quiz</a>
+        <h2 id="timer" class="card-text d-none">
+          Time Remaining:<span id="timeLeft">0 seconds</span>
+        </h2>
+        <h2 id="score" class="card-text d-none">
+          Current Score:<span id="currentScore">0</span>
+        </h2>
+        <div id="highScoresDiv" class="d-none">
+          <h3>High Scores</h3>
+          <ul id="highScoreList" class="list-group">
+          </ul>
+        </div>
+      </div>
     </div>
-
+    
     <div
       class="modal fade"
       id="saveModal"
@@ -79,11 +99,7 @@
       </div>
     </div>
 
-    <div id="highScoresDiv" class="d-none">
-      <h3>High Scores</h3>
-      <ul id="highScoreList" class="list-group">
-      </ul>
-    </div>
+    
 
     <!-- Jquery, Popper, Bootstrap JS -->
     <script

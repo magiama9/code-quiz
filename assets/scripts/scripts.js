@@ -43,7 +43,7 @@ function displayQuestion(num) {
 
   for (var j = 0; j < questions[num].choices.length; j++) {
     $("#questionOptions").append(
-      "<li class='list-group-item border-0'><a class='choice btn btn-primary' tabindex=" +
+      "<li class='list-inline-item border-0 mb-n2'><a class='choice btn btn-primary' tabindex=" +
         j +
         ">" +
         questions[num].choices[j]
@@ -72,7 +72,8 @@ $("#questionBody").click(function(event) {
     $(event.target).attr({
       "data-toggle": "popover",
       title: "Wrong Answer. Try Again",
-      "data-trigger": "focus"
+      "data-trigger": "focus",
+      "data-placement": "bottom"
     });
     // Ensures popover only happens if a button is clicked, not a random space in the div
     if (clickedIndex >= 0) {
@@ -145,6 +146,11 @@ $("#save").click(function() {
   save($("#name").val());
 });
 
+// $("#save").on("submit", function() {
+//   event.preventDefault();
+//   save($("#name").val());
+// });
+
 // Saves score to local storage and displays highscore list
 function save(str) {
   highScores.score.push(currentScore);
@@ -172,3 +178,13 @@ function displayScores() {
     );
   }
 }
+
+$("#highScorePage").click(function(){
+  $(this).addClass("active");
+  $("#quizPage").removeClass("active");
+})
+
+$("#quizPage").click(function(){
+  $(this).addClass("active");
+  $("#highScorePage").removeClass("active");
+})
