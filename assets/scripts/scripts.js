@@ -1,12 +1,14 @@
 /*
 *****************************************
+*****************************************
+
 # Code Quiz Homework
 
 * Timer based quiz application on coding fundamentals.
 
 * Start with landing page to begin quiz
 
-  *?? Offer the choice of different quizzes??
+  * ?? Offer the choice of different quizzes??
 
   * Let user take the timed quiz
     * Check user's answers
@@ -16,26 +18,17 @@
     * Display a list of high scores
 
 *****************************************
-
-
-## Pseudocode
-
-  * Make the start quiz button load the first question
-  * Each question should automatically go to the next question if the answer is correct
-  * Display the correct answer if the answer was wrong.
-  
-  * At the end of the quiz, display the user's final score.
-  * Save the score to local storage
-
 *****************************************
-
 */
 
 // Global Variables
 var questionCount = 0;
 var secondsLeft = 0;
 var currentScore = 0;
-var highScores = { name: [], score: [] };
+var highScores = [];
+
+// Called to fetch any scores from storage when page loads
+fetchScores();
 
 // Display a question and its options as a list of buttons.
 function displayQuestion(num) {
@@ -135,62 +128,58 @@ function updateScore() {
 function gameOver() {
   $("#finalScoreSpan").text(currentScore);
   $("#saveModal").modal();
-  // $("#saveScore").removeClass("d-none");
   $("#timer").addClass("d-none");
   $("#score").addClass("d-none");
 }
 
-// Handles click/submit event on the score save form
+/* Handles click event on the score save form.
+N.B. DOES NOT HANDLE PROPERLY IF USER HITS ENTER */
 $("#save").click(function() {
   event.preventDefault();
-  save($("#name").val());
+  $("#saveModal").modal("hide");
+  fetchScores();
+  $("#name").text("");
+  switchPage();
 });
 
-// $("#save").on("submit", function() {
-//   event.preventDefault();
-//   save($("#name").val());
-// });
+function fetchScores() {
+  // Fetches scored stores from local storage or returns an empty array if it doesn't exist.
+  var storedScores = JSON.parse(localStorage.getItem("storedScores") || "[]");
 
-// Saves score to local storage and displays highscore list
-function save(str) {
-  highScores.score.push(currentScore);
-  highScores.name.push(str);
-  localStorage.setItem("highscores", JSON.stringify(highScores.score));
-  localStorage.setItem("names", JSON.stringify(highScores.name));
-  $("#saveModal").modal("hide");
-  displayScores();
-}
+  // Only pushes a new score to the array if the user entered a value for their name.
+  if ($("#name").val() != 0) {
+    var userScore = {
+      name: $("#name").val(),
+      score: currentScore
+    };
+    storedScores.push(userScore);
+  }
 
-// Displays high scores list. Function is called in save()
-function displayScores() {
-  var highScoresStr = localStorage.getItem("highscores");
-  var scoreNameStr = localStorage.getItem("names");
-  highScores.score = JSON.parse(highScoresStr);
-  highScores.name = JSON.parse(scoreNameStr);
-  $("#highScoresDiv").removeClass("d-none");
-  $("#saveScore").addClass("d-none");
-  for (var i = 0; i < highScores.score.length; i++) {
+  // Iterates through the scores and appends them to the score list
+  for (var i = 0; i < storedScores.length; i++) {
     $("#highScoreList").append(
       "<li class='list-group-item border-0'>" +
-        highScores.name[i] +
-        ":" +
-        highScores.score[i]
+        storedScores[i].name +
+        "---" +
+        storedScores[i].score
     );
   }
+  // Updates local storage
+  localStorage.setItem("storedScores", JSON.stringify(storedScores));
+
+  // Sets the name field to blank so the same score isn't added repeatedly
+  $("#name").text("");
 }
 
-$("#highScorePage").click(function(){
-  $(this).addClass("active");
-  $("#quizPage").removeClass("active");
-  $("#quizBody").addClass("d-none");
-  $("#highScoresDiv").removeClass("d-none");
+// Changes the page when a nav link is clicked display
+$(".nav-link").click(function() {
+  switchPage();
+});
 
-})
-
-$("#quizPage").click(function(){
-  $(this).addClass("active");
-  $("#quizBody").removeClass("d-none");
-  $("#highScoresDiv").addClass("d-none");
-  $("#highScorePage").removeClass("active");
-
-})
+// Toggles display of elements
+function switchPage() {
+  $("#quizPage").toggleClass("active");
+  $("#highScorePage").toggleClass("active");
+  $("#quizBody").toggleClass("d-none");
+  $("#highScoresDiv").toggleClass("d-none");
+}
