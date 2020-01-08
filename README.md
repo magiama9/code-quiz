@@ -17,9 +17,9 @@ Users receive 10 points for each correct answer and lose 5 points for each incor
 The application reads questions formatted as an array of objects loaded in from another file "/assets/scripts/questions.js". The application utilizes local storage to allow users to save and view their scores.
 
 The application utilizes the following frameworks and libraries:
-  * Jquery
-  * Bootstrap
-  * Popper
+  * Jquery -- handles selection and DOM manipulation
+  * Bootstrap -- handles styling and responsiveness
+  * Popper -- enables popover effect when the wrong answer is selected
 
 ## To-do List
 
