@@ -26,4 +26,5 @@ The application utilizes the following frameworks and libraries:
   * Implement open-source API to load quiz questions dynamically based on user selection.
   * Order and number high scores from highest to lowest.
   * Implement server-side storage of scores.
-  * Add responsive styling and accessibility.
+  * ~~Add responsive styling and accessibility~~.
+  * Remove styling actions from JS and handle with CSS
