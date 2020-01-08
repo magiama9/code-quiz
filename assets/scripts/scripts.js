@@ -35,7 +35,7 @@ function displayQuestion(num) {
 
   for (var j = 0; j < questions[num].choices.length; j++) {
     $("#questionOptions").append(
-      "<li class='list-inline-item border-0 mb-n2'><a class='choice btn btn-primary' tabindex=" +
+      "<li class='list-inline-item border-0 mb-lg-n2'><a class='choice btn btn-primary' tabindex=" +
         j +
         ">" +
         questions[num].choices[j]
@@ -131,6 +131,9 @@ function updateScore() {
 function gameOver() {
   $("#finalScoreSpan").text(currentScore);
   $("#saveModal").modal();
+
+  // Disables enter key while modal is active
+  if (window.event.keyCode == 13 ) return false;
   $("#timer").addClass("d-none");
   $("#score").addClass("d-none");
 }
@@ -196,4 +199,6 @@ function resetStart() {
   $("#start").toggleClass("d-none");
   questionCount = 0;
   currentScore = 0;
+  // Re-enables enter key that was disabled when modal was activated.
+  if (window.event.keyCode == 13 ) return true;
 }
