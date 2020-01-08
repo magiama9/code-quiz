@@ -25,7 +25,6 @@
 var questionCount = 0;
 var secondsLeft = 0;
 var currentScore = 0;
-var highScores = [];
 
 // Called to fetch any scores from storage when page loads
 fetchScores();
@@ -61,7 +60,11 @@ $("#questionBody").click(function(event) {
       gameOver();
     }
   } else {
+    // This section occurs if the wrong answer is clicked
+
     currentScore -= 5;
+
+    //Triggers Bootstrap popover
     $(event.target).attr({
       "data-toggle": "popover",
       title: "Wrong Answer. Try Again",
